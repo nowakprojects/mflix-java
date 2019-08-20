@@ -57,10 +57,10 @@ public class ProjectionTest extends TicketTest {
 
       Assert.assertTrue(
           "Should return `_id` field. Check your projection",
-           doc.keySet().contains("_id"));
+           doc.containsKey("_id"));
       Assert.assertTrue(
           "Should return `title` field. Check your projection",
-           doc.keySet().contains("title"));
+           doc.containsKey("title"));
     }
   }
 }
