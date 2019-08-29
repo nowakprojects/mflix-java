@@ -23,13 +23,15 @@ import java.util.concurrent.TimeUnit;
 @SpringBootTest
 public class MongoClientLesson extends AbstractLesson {
 
+  private static final String MFLIX_DATABASE = "mflix";
+
   private MongoClient mongoClient;
 
   private MongoDatabase database;
 
   private MongoCollection<Document> collection;
 
-  private String uri = "<YOUR SRV STRING from the application.properties file>";
+  private String uri = "mongodb+srv://m220student:m220password@mflix-ad45d.gcp.mongodb.net/test";
 
   private Document document;
 
@@ -77,7 +79,7 @@ public class MongoClientLesson extends AbstractLesson {
     MongoClientSettings clientSettings =
         MongoClientSettings.builder()
             .applyConnectionString(connectionString)
-            .applicationName("mflix")
+            .applicationName(MFLIX_DATABASE)
             .applyToConnectionPoolSettings(
                 builder -> builder.maxWaitTime(1000, TimeUnit.MILLISECONDS))
             .build();
@@ -121,7 +123,7 @@ public class MongoClientLesson extends AbstractLesson {
     you need to go over the contents more than once.
      */
 
-    Assert.assertTrue(dbnames.contains("mflix"));
+    Assert.assertTrue(dbnames.contains(MFLIX_DATABASE));
 
     /*
     Then we have our MongoDatabase object. We will use this object to
@@ -129,7 +131,7 @@ public class MongoClientLesson extends AbstractLesson {
     database level read preferences, read concerns and write concerns.
      */
 
-    database = mongoClient.getDatabase("mflix");
+    database = mongoClient.getDatabase(MFLIX_DATABASE);
 
     ReadPreference readPreference = database.getReadPreference();
 
@@ -154,7 +156,7 @@ public class MongoClientLesson extends AbstractLesson {
      */
 
     mongoClient = MongoClients.create(uri);
-    database = mongoClient.getDatabase("mflix");
+    database = mongoClient.getDatabase(MFLIX_DATABASE);
     collection = database.getCollection("movies");
 
     /*

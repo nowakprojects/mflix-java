@@ -42,7 +42,7 @@ public class BasicReads extends AbstractLesson {
     // Because we're passing in a new Document with no information, we would
     // expect it to find the first document encountered in the collection.
     // in the mongo shell, this would look like db.movies.find().limit(1)
-    MongoCursor cursor = moviesCollection.find(new Document()).limit(1).iterator();
+    MongoCursor cursor = moviesCollection.find().limit(1).iterator();
 
     // use the next() method to get the next item in the iterator.
     Document actual = (Document) cursor.next();
@@ -117,8 +117,8 @@ public class BasicReads extends AbstractLesson {
     // now we issue the query, and send them directly into our container
     moviesCollection.find(queryFilter).into(results);
 
-    // from previously exploring the dataset, we expect 29 results
-    int expectedResultsSize = 29;
+    // from previously exploring the dataset, we expect 21 results
+    int expectedResultsSize = 21;
     Assert.assertEquals(expectedResultsSize, results.size());
 
     // let's look at one of the documents now

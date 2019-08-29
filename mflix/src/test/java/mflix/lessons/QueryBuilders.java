@@ -119,7 +119,7 @@ public class QueryBuilders extends AbstractLesson {
 
     // 4 films. Let's enumerate their titles
     Set<String> titles =
-        results.stream().map(movie -> (String) movie.get("title")).collect(Collectors.toSet());
+        results.stream().map(movie -> movie.getString("title")).collect(Collectors.toSet());
     Assert.assertTrue(
         titles.containsAll(
             Arrays.asList("Forrest Gump", "Toy Story", "Toy Story 2", "Saving Private Ryan")));
